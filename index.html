@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>月色与雪色之外：王雪二年记</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f5efe3; --paper2:#efe6d3; --ink:#33291d; --ink-soft:#5c5140;
+    --dim:#98917f; --cinnabar:#a63d2f; --cinnabar-soft:#c05a48;
+    --her:#4e6577; --line:#d9cdb4; --card:#fbf7ee;
+    --serif:"Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif;
+    --kai:"Ma Shan Zheng","Kaiti SC","STKaiti","KaiTi",cursive;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--serif); font-size:17.5px; line-height:2.05;
+    background-image:
+      radial-gradient(1200px 500px at 85% -5%, rgba(166,61,47,.05), transparent 60%),
+      radial-gradient(900px 600px at -10% 100%, rgba(78,101,119,.06), transparent 55%);
+  }
+  /* 纸纹 */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:3; opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.32 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection{background:#e8c9b8; color:#3a2317}
+
+  .wrap{max-width:840px;margin:0 auto;padding:0 28px 140px}
+
+  /* ============ 封面 ============ */
+  .cover{position:relative; padding:110px 0 72px; min-height:78vh}
+  .kicker{
+    display:inline-flex; align-items:center; gap:14px;
+    font-size:12.5px; letter-spacing:.42em; color:var(--dim);
+    animation:rise .9s .1s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .kicker::before{content:""; width:44px; height:1px; background:var(--cinnabar)}
+  h1{
+    margin-top:34px; font-weight:900; font-size:clamp(46px,8vw,84px);
+    line-height:1.22; letter-spacing:.06em; color:#2c2114;
+    animation:rise 1s .25s cubic-bezier(.2,.7,.2,1) both;
+  }
+  h1 .moon,h1 .snow{color:var(--cinnabar); position:relative}
+  .cover .sub{
+    margin-top:26px; color:var(--ink-soft); font-size:16px; letter-spacing:.12em;
+    animation:rise 1s .4s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .cover .sub b{color:var(--cinnabar)}
+  /* 竖排诗笺 */
+  .scroll-poem{
+    position:absolute; top:96px; right:0;
+    writing-mode:vertical-rl; text-orientation:mixed;
+    font-family:var(--kai); font-size:21px; letter-spacing:.32em; line-height:2.4;
+    color:var(--ink-soft); padding:28px 18px 34px;
+    background:linear-gradient(175deg,var(--card),#f3ecdc);
+    border:1px solid var(--line); box-shadow:6px 8px 0 rgba(166,61,47,.08);
+    animation:rise 1.1s .55s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .scroll-poem i{font-style:normal; color:var(--cinnabar)}
+  .scroll-poem .src{font-size:12px; color:var(--dim); letter-spacing:.2em; margin-top:1em}
+  /* 印章 */
+  .seal{
+    position:absolute; bottom:120px; right:36px; width:76px; height:76px;
+    border:3px solid var(--cinnabar); color:var(--cinnabar);
+    display:grid; place-items:center; font-family:var(--kai); font-size:24px;
+    line-height:1.15; text-align:center; letter-spacing:.08em;
+    transform:rotate(-7deg); opacity:.85; border-radius:6px;
+    box-shadow:inset 0 0 0 2px rgba(166,61,47,.25);
+    animation:stamp .5s 1.15s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  /* 索引卡 */
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+    margin-top:84px; animation:rise 1s .7s both;
+  }
+  .stat{
+    background:var(--card); border:1px solid var(--line); padding:18px 16px 14px;
+    position:relative; box-shadow:0 2px 0 rgba(51,41,29,.05);
+  }
+  .stat::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--cinnabar); opacity:.75}
+  .stat b{display:block; font-size:30px; font-weight:900; color:#2c2114; letter-spacing:.02em}
+  .stat span{font-size:12px; color:var(--dim); letter-spacing:.16em}
+  @keyframes rise{from{opacity:0; transform:translateY(26px)} to{opacity:1; transform:none}}
+  @keyframes stamp{from{opacity:0; transform:rotate(-7deg) scale(1.6)} to{opacity:.85; transform:rotate(-7deg) scale(1)}}
+
+  /* ============ 目录 ============ */
+  nav{
+    margin:36px 0 30px; padding:34px 38px;
+    background:linear-gradient(180deg,var(--card),#f6f0e2);
+    border:1px solid var(--line); position:relative;
+  }
+  nav::after{
+    content:"目\A录"; white-space:pre; position:absolute; top:30px; right:30px;
+    font-family:var(--kai); font-size:30px; line-height:1.25; color:rgba(166,61,47,.5);
+    letter-spacing:.1em;
+  }
+  nav .nt{font-size:11.5px; letter-spacing:.4em; color:var(--dim); margin-bottom:16px}
+  nav ol{list-style:none; columns:2; column-gap:48px; max-width:600px}
+  nav li{padding:5px 0; font-size:15.5px; break-inside:avoid; display:flex; align-items:baseline; gap:12px}
+  nav li a{color:var(--ink); text-decoration:none; display:flex; align-items:baseline; gap:12px; width:100%}
+  nav li a:hover .cn{color:var(--cinnabar)}
+  nav li .cn{font-family:var(--kai); color:var(--cinnabar-soft); font-size:14px; min-width:2.4em}
+  nav li .dots{flex:1; border-bottom:1px dotted var(--line); transform:translateY(-4px)}
+
+  /* ============ 章节 ============ */
+  section{margin-top:96px}
+  h2{
+    display:flex; align-items:baseline; gap:20px;
+    font-size:25px; font-weight:900; letter-spacing:.08em; color:#2c2114;
+    padding-bottom:16px; margin-bottom:30px; border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  h2::after{content:""; position:absolute; bottom:-1px; left:0; width:72px; height:2px; background:var(--cinnabar)}
+  h2 .cn{
+    font-family:var(--kai); font-weight:400; font-size:42px; color:var(--cinnabar);
+    opacity:.9; line-height:1;
+  }
+  p{margin:0 0 22px; text-align:justify}
+
+  /* 档案纸条（对话） */
+  .chat{
+    background:var(--card); border:1px solid var(--line);
+    margin:30px 0; padding:20px 26px 16px; font-size:15.5px; line-height:1.95;
+    position:relative; box-shadow:3px 4px 0 rgba(51,41,29,.05);
+  }
+  .chat::before{
+    content:"档案摘录"; position:absolute; top:-11px; left:18px;
+    font-size:11px; letter-spacing:.3em; color:var(--cinnabar);
+    background:var(--paper); padding:0 10px; border:1px solid var(--line);
+  }
+  .chat .t{color:var(--dim); font-size:12.5px; letter-spacing:.1em; margin-bottom:8px}
+  .chat div{margin:3px 0}
+  .chat .me{color:#7a3a2b; padding-left:14px; border-left:2px solid rgba(166,61,47,.45)}
+  .chat .her{color:var(--her); padding-left:14px; border-left:2px solid rgba(78,101,119,.45)}
+  /* 朱批 */
+  em.note{
+    display:block; font-style:normal; margin-top:16px; padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-family:var(--kai); font-size:16.5px; line-height:1.9; color:var(--cinnabar);
+  }
+  em.note::before{content:"批："; opacity:.7}
+
+  /* 信笺（大引） */
+  blockquote{
+    margin:38px 0; padding:30px 34px;
+    background:
+      linear-gradient(90deg, rgba(166,61,47,.06) 1px, transparent 1px) 0 0/28px 100%,
+      linear-gradient(180deg,#faf5e9,#f4edda);
+    border:1px solid var(--line); border-left:4px solid var(--cinnabar);
+    font-size:19px; line-height:2.15; color:#453a29; letter-spacing:.03em;
+  }
+  blockquote.kai{font-family:var(--kai); font-size:21px}
+
+  /* 称呼考古时间轴 */
+  .strata{
+    margin:38px 0; padding:34px 30px 40px; background:var(--card);
+    border:1px solid var(--line); overflow-x:auto;
+  }
+  .strata .st{font-size:11.5px; letter-spacing:.34em; color:var(--dim); margin-bottom:26px}
+  .strata .rail{display:flex; align-items:flex-start; min-width:560px; position:relative}
+  .strata .rail::before{content:""; position:absolute; top:9px; left:0; right:0; height:1px; background:var(--line)}
+  .strata .n{flex:1; position:relative; padding-top:24px; text-align:center}
+  .strata .n::before{
+    content:""; position:absolute; top:4px; left:50%; transform:translateX(-50%);
+    width:11px; height:11px; border-radius:50%; background:var(--paper); border:2px solid var(--her);
+  }
+  .strata .n.warm::before{border-color:var(--cinnabar); background:var(--cinnabar)}
+  .strata .n b{font-family:var(--kai); font-size:19px; color:var(--ink); display:block}
+  .strata .n.warm b{color:var(--cinnabar)}
+  .strata .n span{font-size:11px; color:var(--dim); letter-spacing:.1em}
+
+  /* 卷尾 */
+  .fin{
+    margin-top:110px; padding:30px 0 0; border-top:1px solid var(--line);
+    color:var(--dim); font-size:13.5px; line-height:2.1; position:relative;
+  }
+  .fin::before{
+    content:"卷终"; position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+    background:var(--paper); padding:0 16px; font-family:var(--kai);
+    color:var(--cinnabar); font-size:16px; letter-spacing:.4em;
+  }
+
+  /* 滚动显现 */
+  .rv{opacity:0; transform:translateY(26px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1; transform:none}
+
+  @media (max-width:720px){
+    .scroll-poem{position:static; writing-mode:horizontal-tb; margin-top:36px; font-size:18px; box-shadow:none}
+    .seal{display:none}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    nav ol{columns:1}
+    .cover{min-height:auto}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ================= 封面 ================= -->
+<header class="cover">
+  <div class="kicker">LX ARCHIVE · 关系卷 第一篇</div>
+  <h1>《<span class="moon">月</span>色与<span class="snow">雪</span>色之外》</h1>
+  <div class="sub">王雪二年记 · 一段关系的语体变迁史<br><b>2024.08.09</b> —— <b>2026.07.01</b></div>
+
+  <aside class="scroll-poem">
+    月色与雪色之外<br>你是唯一的<i>绝色</i>
+    <div class="src">—— 余光中 · 二〇二四年十月二十三日转引</div>
+  </aside>
+
+  <div class="seal">凝结核藏</div>
+
+  <div class="stats">
+    <div class="stat"><b>6,023</b><span>行完整对话</span></div>
+    <div class="stat"><b>693</b><span>天时间跨度</span></div>
+    <div class="stat"><b>7 种</b><span>称呼的演变</span></div>
+    <div class="stat"><b>1 幅</b><span>署名的画</span></div>
+  </div>
+</header>
+
+<!-- ================= 目录 ================= -->
+<nav class="rv">
+  <div class="nt">READING MAP</div>
+  <ol>
+    <li><a href="#c1"><span class="cn">壹</span>一切从一张二维码开始<span class="dots"></span></a></li>
+    <li><a href="#c2"><span class="cn">贰</span>学姐救命<span class="dots"></span></a></li>
+    <li><a href="#c3"><span class="cn">叁</span>秋天：雪儿、耳机与快递<span class="dots"></span></a></li>
+    <li><a href="#c4"><span class="cn">肆</span>十月二十三日，余光中<span class="dots"></span></a></li>
+    <li><a href="#c5"><span class="cn">伍</span>凌晨一点三十四分的告别<span class="dots"></span></a></li>
+    <li><a href="#c6"><span class="cn">陆</span>静以修身：一封文言道歉信<span class="dots"></span></a></li>
+    <li><a href="#c7"><span class="cn">柒</span>称呼考古学<span class="dots"></span></a></li>
+    <li><a href="#c8"><span class="cn">捌</span>成熟的形状<span class="dots"></span></a></li>
+    <li><a href="#c9"><span class="cn">玖</span>把 GPT 借你一天<span class="dots"></span></a></li>
+    <li><a href="#c10"><span class="cn">拾</span>最后是一幅画<span class="dots"></span></a></li>
+  </ol>
+</nav>
+
+<!-- ================= 正文 ================= -->
+<section id="c1" class="rv">
+  <h2><span class="cn">壹</span>一切从一张二维码开始</h2>
+  <p>2024 年 8 月 9 日下午三点三十五分，一个叫王雪的学姐发来第一条消息。那时他还没进大学，她替他办校园卡。</p>
+  <div class="chat">
+    <div class="t">2024-08-09 15:35</div>
+    <div class="her">王雪：hi</div>
+    <div class="me">我：[好的]</div>
+    <div class="me">我：……</div>
+    <div class="me">我：QR</div>
+    <div class="me">我：二维码</div>
+    <div class="me">我：QR code</div>
+    <em class="note">这是全部对话的第一页。一个省略号，三条消息说一个词——后来六千行对话的语言习惯，第一分钟就全齐了。</em>
+  </div>
+  <p>她说：「之后还有什么问题都来找我」「等开学」。开学前的八月，两人为校园卡押金的六十五块钱来回开玩笑——「你用 65 RMB 抵押了信用」。这句玩笑话是这段关系的地基：钱很小，信用很大。</p>
+</section>
+
+<section id="c2" class="rv">
+  <h2><span class="cn">贰</span>学姐救命</h2>
+  <p>九月，他想进青媒，面试前给她发：「学姐救命」「姐姐」。她回：「我是副部长说了不算」。但九月二十六日她说了另一句话——</p>
+  <div class="chat">
+    <div class="t">2024-09-26</div>
+    <div class="her">王雪：你要是想干的话我把我的活给你</div>
+    <div class="me">我：试试</div>
+    <em class="note">两个字的回答。后来他在 2025 年公开写道：「加入青媒这一路，最想感谢的是领我进门的王雪学姐——她让我明白：新生选择社团，或许不是看兴趣多浓，而是看这个群体是否真诚可靠。」</em>
+  </div>
+  <p>九月十九日，他在面试场附近听辩论，等她结束。她问他来做什么，他说得很直接：「见你呀」。</p>
+</section>
+
+<section id="c3" class="rv">
+  <h2><span class="cn">叁</span>秋天：雪儿、耳机与快递</h2>
+  <p>2024 年秋天，是全部六千行里密度最高的季节。他叫她「雪儿」，她纠正「叫学姐[捂脸]」；他改叫「小雪姐」「姐[可怜]」，打字快的时候直接是拼音「xuejie」，早上问好缩写成「早呀xj」。</p>
+  <p>他的在意藏在提醒里：她落下耳机，他喊「耳机耳机」，她说「厉害」；降温下雨，他发「下雨了，记得添衣」；她晚归，他说「早点休息，不要想太多」。他顺路帮她取快递、带吃的，又叮嘱她「分你宿友好了」；她想给他带喝的，他一连串拒绝——「不要」「刚喝了好多」「不准带[发抖]」「以后也不用[得意]」，最后补一句「安全回来就好」。</p>
+  <div class="chat">
+    <div class="t">2024-10-13 · 他从博物馆带回一枚纪念币</div>
+    <div class="me">我：送你一枚吧</div>
+    <div class="me">我：小小的一个，挂脖上</div>
+    <div class="her">王雪：那我先保存着</div>
+    <div class="me">我：那天有地儿了，就放</div>
+    <em class="note">「先保存着」是一个温柔的悬置。这枚纪念币后来没有再出现在对话里。</em>
+  </div>
+  <p>他也认真对待她的作品。她画画参赛，他说「你真的多才多艺」；她做 H5，他从色调讲到视角：「从天的视角看，字浮于天，而布展于地，紫色为扎染之色彩」。他一般不填问卷，但她的问卷他填了，还因为没被叫上参与过程而抗议：「你这样我很没参与感[发怒]」。</p>
+</section>
+
+<section id="c4" class="rv">
+  <h2><span class="cn">肆</span>十月二十三日，余光中</h2>
+  <p>2024 年 10 月 23 日上午十点，他发了三条消息。</p>
+  <div class="chat">
+    <div class="t">2024-10-23 10:11</div>
+    <div class="me">我：余光中见景悟情，无景亦兴情</div>
+    <div class="me">我：月色与雪色之外<br>你是唯一的绝色</div>
+    <div class="me">我：怎么才能得到你</div>
+    <em class="note">余光中《绝色》。「雪色」二字里嵌着她的名字。后面他自己接了一句打岔——「现在还是未来 / 麻袋或者甜言蜜语」——用玩笑把刚说出口的话又收了回去。</em>
+  </div>
+  <p>这是全部档案里他离「说破」最近的一次。用的还是别人的诗——诗是铠甲，认真话必须穿着铠甲才能出门。同一个秋天还有那句自造的晚安：「山河己暮，且晚且安」。「己」是「已」的错字，他打错从不改。错字与诗并存，这就是他的语言。</p>
+</section>
+
+<section id="c5" class="rv">
+  <h2><span class="cn">伍</span>凌晨一点三十四分的告别</h2>
+  <div class="chat">
+    <div class="t">2024-11-23 01:34</div>
+    <div class="me">我：感觉你不喜欢晚安，这是最后一次了。晚安小雪，晚安雪儿，夜夜好梦</div>
+    <div class="me">我：[太阳]</div>
+    <div class="me"><span style="color:var(--dim);font-size:12.5px">（第二天上午）</span>啊咧咧，还说从早安开始，一下子睡过了</div>
+    <em class="note">凌晨一点半，他把「晚安」这项日常自己停掉了。没有质问，没有商量——察觉到对方不那么需要，就单方面收回，再用第二天的一句玩笑把体面缝好。档案里把这个模式叫「独白后的自我取消」，这是最典型的一次。</em>
+  </div>
+  <p>值得注意的是他停掉的方式：最后一次里说了两遍晚安，两个称呼都用上了——「晚安小雪，晚安雪儿」。像是把攒着的都用完，再关灯。</p>
+</section>
+
+<section id="c6" class="rv">
+  <h2><span class="cn">陆</span>静以修身：一封文言道歉信</h2>
+  <p>一个月后，2024 年 12 月 26 日晚上十一点十四分，他发来一段没有上下文的文言：</p>
+  <blockquote class="kai">古人说：「静以修身」，说来惭愧，刚刚才懂悄悄二字，百日以降，实属无礼，还望莫怪。无以为谢，若有所需，自当竭力。瞬念有感，当效君子之交，笔力虽弱，不减真诚之心。顺绥！</blockquote>
+  <p>「百日以降」——从八月到十二月，正好一百多天。他为整个秋天的热烈道了歉，并且给这段关系重新定了性：「君子之交」。五天后跨年，他又认真感谢她「让自己的大学开局不茫然」。</p>
+  <p>没有争吵，没有摊牌，甚至可能对方从头到尾没有说过一句重话。一段心事的整个生命周期，全部发生在他单方面的语言里：升温是他的诗，降温是他的文言。</p>
+</section>
+
+<section id="c7" class="rv">
+  <h2><span class="cn">柒</span>称呼考古学：从雪儿到王主任</h2>
+  <p>如果把两年的称呼按时间排开，能看到一段关系的地质剖面：</p>
+  <div class="strata">
+    <div class="st">STRATIGRAPHY · 称呼地层图 2024 → 2026</div>
+    <div class="rail">
+      <div class="n warm"><b>雪儿</b><span>2024 秋</span></div>
+      <div class="n warm"><b>小雪姐</b><span>2024 秋</span></div>
+      <div class="n warm"><b>xj</b><span>2024 秋</span></div>
+      <div class="n"><b>王部长</b><span>2024 冬</span></div>
+      <div class="n"><b>王学姐</b><span>2025</span></div>
+      <div class="n"><b>王雪主任</b><span>2025</span></div>
+      <div class="n"><b>王主任</b><span>2026</span></div>
+    </div>
+  </div>
+  <p>表情包同步换代：2024 年秋天的[月亮][玫瑰]，到 2025 年之后成建制地换成[社会社会][抱拳][OK]。「晚安雪儿」变成了「辛苦王部长了[社会社会]」「我向王雪主任汇报啦[转圈][转圈]」「谨遵王主任教导[抱拳]」。</p>
+  <p>但要看仔细：这不是疏远，是换轨。私人轨道关闭之后，两个人在工作轨道上反而越靠越近——她给他派活、审稿、催进度，他协调编辑、做图、兜底。2026 年 3 月，别人拿不准一篇推送，他说：「这个我把握不住，王雪能把住」。这句话是新关系里的最高评价。</p>
+</section>
+
+<section id="c8" class="rv">
+  <h2><span class="cn">捌</span>成熟的形状</h2>
+  <p>2026 年春天的运动会推送，是这段协作关系的成熟标本。她排兵布阵：「郑晓萌负责第一天，梁博星第二天，丁佳第三天」；他被她的方案折服：「王学姐才华横溢呀[哇]」；他把样式框交给她：「这是王雪学姐刚做好的，确实好看」；他也敢跟她要权限：「王雪姐，给我个管理员当当呗[旺柴]」。</p>
+  <div class="chat">
+    <div class="t">2026-03-31 · 全部对话的最后一页附近</div>
+    <div class="me">我：我记得早上那一版有一张篮球比赛的照片，就是队员们都跳起来争球的一个照片，那张拍的还挺好的。</div>
+    <div class="me">我：这张图片在哪？</div>
+    <div class="me">我：行。哎，你现在在干嘛？上班吗？</div>
+    <em class="note">谈完工作，顺口问一句「你现在在干嘛」。两年过去，关心还在，只是不再需要诗了。</em>
+  </div>
+</section>
+
+<section id="c9" class="rv">
+  <h2><span class="cn">玖</span>把 GPT 借你一天</h2>
+  <div class="chat">
+    <div class="t">2026-06-28 · 她要写论文</div>
+    <div class="me">我：要不你直接远控我电脑用吧</div>
+    <div class="me">我：因为你的梯子电脑上好像没有，以及现在账号登录的人有点多，防止封了</div>
+    <div class="me">我：行 你今天就用 我出去搞活动</div>
+    <div class="me">我：行，我今天不用，你今天一天都可以用</div>
+    <em class="note">2026 年的他，把最贵重的东西——自己的电脑、自己的 AI 账号——整天让出去。这是他的情感语言：服务是货币，帮忙代替抒情。2024 年他给她的是诗，2026 年他给她的是算力。</em>
+  </div>
+</section>
+
+<section id="c10" class="rv">
+  <h2><span class="cn">拾</span>最后是一幅画</h2>
+  <p>2026 年 7 月 1 日，离任换届前夕。他送了画——两份，其中一份署了名。</p>
+  <div class="chat">
+    <div class="t">2026-07-01</div>
+    <div class="me">我：反正已经扔那儿了 有两份</div>
+    <div class="me">我：其中一份署名</div>
+    <div class="her">王雪：那我拿回办公室，你去贴一下吧</div>
+    <em class="note">「反正已经扔那儿了」——送最重的礼物，用最轻的语气。和 2024 年那枚「先保存着」的纪念币遥遥相对：那一次她悬置了，这一次她收下了，挂进了两个人共同工作过的办公室。</em>
+  </div>
+  <p>第二天她在群里提醒：「宝们，刚想起来明天下午一点抢课，要用电脑抢课的记得带上电脑」。他回：「我也带着」。</p>
+  <p>六千零二十三行对话，止于这样一句日常。没有告别的告别，是这段关系最后的形状：从「月色与雪色之外，你是唯一的绝色」，到「我也带着」——中间隔着六百九十三天，一次凌晨的自我取消，一封文言道歉信，七种称呼，和一幅署名的画。</p>
+  <blockquote>诗没有得到回应，但人得到了：一个可靠的战友，一间挂着他的画的办公室。这也许不是他 2024 年秋天想要的结局，但以他 2023 年就写下的处世方式——「对外自己是唯一，对自己休身养性」——这是他能给出、也能接住的最好结局。</blockquote>
+</section>
+
+<div class="fin rv">
+  本文全部引文出自真实聊天档案（dialogs/01_lx_王雪.txt，6,023 行）与灵魂档案数据库（王雪相关记录 40 条），未作改写；错字保留原样。<br>
+  解读部分为叙述者基于档案的推断，人心幽微，存疑处以对话原文为准。<br>
+  LX ARCHIVE · 关系卷第一篇 · 2026-07-06 整理
+</div>
+
+</div>
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.08 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
