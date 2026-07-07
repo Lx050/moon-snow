@@ -46,6 +46,7 @@
     animation:rise 1s .25s cubic-bezier(.2,.7,.2,1) both;
   }
   h1 .moon,h1 .snow{color:var(--cinnabar); position:relative}
+  h1 .title-tail{white-space:nowrap}
   .cover .sub{
     margin-top:26px; color:var(--ink-soft); font-size:16px; letter-spacing:.12em;
     animation:rise 1s .4s cubic-bezier(.2,.7,.2,1) both;
@@ -190,6 +191,7 @@
   .rv.in{opacity:1; transform:none}
 
   @media (max-width:720px){
+    h1 .title-tail{display:block}
     .scroll-poem{position:static; writing-mode:horizontal-tb; margin-top:36px; font-size:18px; box-shadow:none}
     .seal{display:none}
     .stats{grid-template-columns:repeat(2,1fr)}
@@ -204,7 +206,7 @@
 <!-- ================= 封面 ================= -->
 <header class="cover">
   <div class="kicker">LX ARCHIVE · 关系卷 第一篇</div>
-  <h1>《<span class="moon">月</span>色与<span class="snow">雪</span>色之外》</h1>
+  <h1>《<span class="moon">月</span>色与<span class="snow">雪</span>色<span class="title-tail">之外》</span></h1>
   <div class="sub">王雪二年记 · 一段关系的语体变迁史<br><b>2024.08.09</b> —— <b>2026.07.01</b></div>
 
   <aside class="scroll-poem">
